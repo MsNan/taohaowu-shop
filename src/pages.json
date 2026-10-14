@@ -1,0 +1,34 @@
+{
+  "easycom": { "autoscan": true, "custom": { "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue" } },
+  "pages": [
+    {"path": "pages/index/index", "style": {"navigationStyle": "custom", "navigationBarTextStyle": "white"}},
+    {"path": "pages/category/category", "style": {"navigationBarTitleText": "分类", "navigationBarBackgroundColor": "#FFFFFF", "navigationBarTextStyle": "black"}},
+    {"path": "pages/cart/cart", "style": {"navigationBarTitleText": "购物车", "navigationBarBackgroundColor": "#FFFFFF", "navigationBarTextStyle": "black"}},
+    {"path": "pages/my/my", "style": {"navigationStyle": "custom", "navigationBarTextStyle": "white"}},
+    {"path": "pages/search/search", "style": {"navigationBarTitleText": "搜索"}},
+    {"path": "pages/detail/detail", "style": {"navigationStyle": "custom", "navigationBarTextStyle": "white"}},
+    {"path": "pages/login/login", "style": {"navigationBarTitleText": "登录"}},
+    {"path": "pages/address/list", "style": {"navigationBarTitleText": "收货地址"}},
+    {"path": "pages/address/edit", "style": {"navigationBarTitleText": "编辑地址"}},
+    {"path": "pages/order/confirm", "style": {"navigationBarTitleText": "确认订单"}},
+    {"path": "pages/pay/result", "style": {"navigationBarTitleText": "支付结果"}},
+    {"path": "pages/order/list", "style": {"navigationBarTitleText": "我的订单"}},
+    {"path": "pages/order/detail", "style": {"navigationBarTitleText": "订单详情"}},
+    {"path": "pages/aftersale/apply", "style": {"navigationBarTitleText": "申请售后"}}
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "淘好物",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F6F6F6"
+  },
+  "tabBar": {
+    "color": "#666666", "selectedColor": "#FF5000", "backgroundColor": "#FFFFFF", "borderStyle": "white",
+    "list": [
+      {"pagePath": "pages/index/index", "text": "首页", "iconPath": "static/tab/home.png", "selectedIconPath": "static/tab/home-on.png"},
+      {"pagePath": "pages/category/category", "text": "分类", "iconPath": "static/tab/cat.png", "selectedIconPath": "static/tab/cat-on.png"},
+      {"pagePath": "pages/cart/cart", "text": "购物车", "iconPath": "static/tab/cart.png", "selectedIconPath": "static/tab/cart-on.png"},
+      {"pagePath": "pages/my/my", "text": "我的", "iconPath": "static/tab/my.png", "selectedIconPath": "static/tab/my-on.png"}
+    ]
+  }
+}

@@ -1,0 +1,706 @@
+{
+ "categories": [
+  {
+   "id": 1,
+   "name": "手机数码",
+   "icon": "📱"
+  },
+  {
+   "id": 2,
+   "name": "服饰鞋包",
+   "icon": "👗"
+  },
+  {
+   "id": 3,
+   "name": "美妆个护",
+   "icon": "💄"
+  },
+  {
+   "id": 4,
+   "name": "家用电器",
+   "icon": "📺"
+  },
+  {
+   "id": 5,
+   "name": "食品生鲜",
+   "icon": "🍎"
+  },
+  {
+   "id": 6,
+   "name": "家居家装",
+   "icon": "🛋️"
+  },
+  {
+   "id": 7,
+   "name": "运动户外",
+   "icon": "⚽"
+  },
+  {
+   "id": 8,
+   "name": "母婴玩具",
+   "icon": "🧸"
+  }
+ ],
+ "banners": [
+  {
+   "id": 1,
+   "image": "/images/banner1.jpg",
+   "productId": 3,
+   "title": "双11 好物狂欢"
+  },
+  {
+   "id": 2,
+   "image": "/images/banner2.jpg",
+   "productId": 6,
+   "title": "数码焕新季"
+  },
+  {
+   "id": 3,
+   "image": "/images/banner3.jpg",
+   "productId": 9,
+   "title": "家电以旧换新"
+  }
+ ],
+ "products": [
+  {
+   "id": 1,
+   "name": "旗舰5G智能手机 256G",
+   "price": 2999,
+   "originalPrice": 3899,
+   "sales": 100,
+   "categoryId": 1,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p1_1.jpg",
+    "/images/p1_2.jpg",
+    "/images/p1_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "旗舰5G智能手机 256G，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 2,
+   "name": "无线降噪蓝牙耳机",
+   "price": 399,
+   "originalPrice": 519,
+   "sales": 3019,
+   "categoryId": 1,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p2_1.jpg",
+    "/images/p2_2.jpg",
+    "/images/p2_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "无线降噪蓝牙耳机，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 3,
+   "name": "轻薄笔记本电脑 14英寸",
+   "price": 4599,
+   "originalPrice": 5979,
+   "sales": 938,
+   "categoryId": 1,
+   "shop": "优选好店",
+   "images": [
+    "/images/p3_1.jpg",
+    "/images/p3_2.jpg",
+    "/images/p3_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "轻薄笔记本电脑 14英寸，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 4,
+   "name": "纯棉宽松T恤 男女同款",
+   "price": 59,
+   "originalPrice": 77,
+   "sales": 3857,
+   "categoryId": 2,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p4_1.jpg",
+    "/images/p4_2.jpg",
+    "/images/p4_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "纯棉宽松T恤 男女同款，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 5,
+   "name": "复古休闲帆布鞋",
+   "price": 129,
+   "originalPrice": 168,
+   "sales": 1776,
+   "categoryId": 2,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p5_1.jpg",
+    "/images/p5_2.jpg",
+    "/images/p5_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "复古休闲帆布鞋，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 6,
+   "name": "真皮单肩通勤包",
+   "price": 269,
+   "originalPrice": 350,
+   "sales": 4695,
+   "categoryId": 2,
+   "shop": "优选好店",
+   "images": [
+    "/images/p6_1.jpg",
+    "/images/p6_2.jpg",
+    "/images/p6_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "真皮单肩通勤包，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 7,
+   "name": "保湿补水面霜 50ml",
+   "price": 159,
+   "originalPrice": 207,
+   "sales": 2614,
+   "categoryId": 3,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p7_1.jpg",
+    "/images/p7_2.jpg",
+    "/images/p7_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "保湿补水面霜 50ml，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 8,
+   "name": "哑光丝绒口红套装",
+   "price": 199,
+   "originalPrice": 259,
+   "sales": 533,
+   "categoryId": 3,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p8_1.jpg",
+    "/images/p8_2.jpg",
+    "/images/p8_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "哑光丝绒口红套装，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 9,
+   "name": "变频节能空调 1.5匹",
+   "price": 2399,
+   "originalPrice": 3119,
+   "sales": 3452,
+   "categoryId": 4,
+   "shop": "优选好店",
+   "images": [
+    "/images/p9_1.jpg",
+    "/images/p9_2.jpg",
+    "/images/p9_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "变频节能空调 1.5匹，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 10,
+   "name": "多功能空气炸锅 5L",
+   "price": 299,
+   "originalPrice": 389,
+   "sales": 1371,
+   "categoryId": 4,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p10_1.jpg",
+    "/images/p10_2.jpg",
+    "/images/p10_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "多功能空气炸锅 5L，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 11,
+   "name": "新疆阿克苏冰糖心苹果 5斤",
+   "price": 39.9,
+   "originalPrice": 52,
+   "sales": 4290,
+   "categoryId": 5,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p11_1.jpg",
+    "/images/p11_2.jpg",
+    "/images/p11_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "新疆阿克苏冰糖心苹果 5斤，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 12,
+   "name": "每日坚果混合装 30袋",
+   "price": 89,
+   "originalPrice": 116,
+   "sales": 2209,
+   "categoryId": 5,
+   "shop": "优选好店",
+   "images": [
+    "/images/p12_1.jpg",
+    "/images/p12_2.jpg",
+    "/images/p12_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "每日坚果混合装 30袋，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 13,
+   "name": "北欧简约布艺沙发",
+   "price": 1899,
+   "originalPrice": 2469,
+   "sales": 128,
+   "categoryId": 6,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p13_1.jpg",
+    "/images/p13_2.jpg",
+    "/images/p13_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "北欧简约布艺沙发，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 14,
+   "name": "记忆棉护颈枕",
+   "price": 79,
+   "originalPrice": 103,
+   "sales": 3047,
+   "categoryId": 6,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p14_1.jpg",
+    "/images/p14_2.jpg",
+    "/images/p14_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "记忆棉护颈枕，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 15,
+   "name": "专业缓震跑步鞋",
+   "price": 459,
+   "originalPrice": 597,
+   "sales": 966,
+   "categoryId": 7,
+   "shop": "优选好店",
+   "images": [
+    "/images/p15_1.jpg",
+    "/images/p15_2.jpg",
+    "/images/p15_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "专业缓震跑步鞋，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 16,
+   "name": "瑜伽垫 加厚防滑",
+   "price": 69,
+   "originalPrice": 90,
+   "sales": 3885,
+   "categoryId": 7,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p16_1.jpg",
+    "/images/p16_2.jpg",
+    "/images/p16_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "瑜伽垫 加厚防滑，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 17,
+   "name": "婴儿纸尿裤 L码 100片",
+   "price": 139,
+   "originalPrice": 181,
+   "sales": 1804,
+   "categoryId": 8,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p17_1.jpg",
+    "/images/p17_2.jpg",
+    "/images/p17_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "婴儿纸尿裤 L码 100片，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 18,
+   "name": "益智积木拼装玩具",
+   "price": 99,
+   "originalPrice": 129,
+   "sales": 4723,
+   "categoryId": 8,
+   "shop": "优选好店",
+   "images": [
+    "/images/p18_1.jpg",
+    "/images/p18_2.jpg",
+    "/images/p18_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "益智积木拼装玩具，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 19,
+   "name": "智能手表 心率血氧监测",
+   "price": 699,
+   "originalPrice": 909,
+   "sales": 2642,
+   "categoryId": 1,
+   "shop": "官方旗舰店",
+   "images": [
+    "/images/p19_1.jpg",
+    "/images/p19_2.jpg",
+    "/images/p19_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "智能手表 心率血氧监测，品质保证，7天无理由退换，全国包邮。"
+  },
+  {
+   "id": 20,
+   "name": "家用扫地机器人",
+   "price": 1599,
+   "originalPrice": 2079,
+   "sales": 561,
+   "categoryId": 4,
+   "shop": "品牌直营店",
+   "images": [
+    "/images/p20_1.jpg",
+    "/images/p20_2.jpg",
+    "/images/p20_3.jpg"
+   ],
+   "specs": [
+    {
+     "name": "颜色",
+     "options": [
+      "经典黑",
+      "珍珠白",
+      "雾霾蓝"
+     ]
+    },
+    {
+     "name": "规格",
+     "options": [
+      "标准款",
+      "升级款"
+     ]
+    }
+   ],
+   "desc": "家用扫地机器人，品质保证，7天无理由退换，全国包邮。"
+  }
+ ]
+}
