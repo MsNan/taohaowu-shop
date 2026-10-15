@@ -100,3 +100,34 @@ npm run build:mp-weixin      # 或 npm run dev:mp-weixin（监听修改）
 
 ## 端到端测试
 后端启动并构建 H5 后：`node tests/e2e.cjs（截图输出到 /workspace/shop-test，可修改脚本中的 OUT）`（puppeteer-core + 无头 Chrome，覆盖浏览→搜索→详情→规格→加购→登录→地址→下单→支付→订单→售后）。
+
+## 管理后台（/admin）
+后端启动后访问 http://localhost:3000/admin/ 。纯原生 JS，无需构建，与前台共用同一套数据（lowdb）。
+- 账号：`ADMIN_USER`（默认 admin）/ `ADMIN_PASSWORD`。开发模式未设置密码时默认 `admin123`；**生产模式（NODE_ENV=production）未设置时会生成随机密码并打印到控制台**。
+- 生产环境务必设置 `JWT_SECRET`、`ADMIN_PASSWORD`。
+- 模块：数据概览、商品（增删改、上下架、库存）、分类、轮播、订单（筛选、填写运单号发货）、售后、用户、打赏记录。
+
+## 打赏
+前台「我的 → 打赏支持」展示微信 / 支付宝收款码（`server/public/images/reward/wechat.jpg`、`alipay.jpg`，替换文件即可）。
+个人收款码没有支付回调，打赏记录为用户自愿提交，后台可对照账单核对。
+
+## 免费版 / 付费版
+通过环境变量切换：`EDITION=free`（默认）或 `EDITION=pro`。付费版还需 `LICENSE_OWNER`、`LICENSE_SALT`、`LICENSE_KEY` 三项匹配，否则自动回退免费版。
+授权码由作者生成：`LICENSE_SALT=私有盐 node scripts/gen-license.mjs 客户名`（盐不要提交到仓库）。
+> 说明：开源代码里的离线校验只是功能开关，不是防破解机制。
+
+| 功能 | 免费版 | 付费版 |
+|---|:-:|:-:|
+| 前台商城全部功能 + 打赏页 | ✅ | ✅ |
+| 后台登录、商品/分类/轮播管理 | ✅ | ✅ |
+| 订单列表、发货 | ✅ | ✅ |
+| 用户列表、打赏记录查看 | ✅ | ✅ |
+| 数据概览（基础指标卡片） | ✅ | ✅ |
+| 数据概览：7 天趋势图、分类销售额、热销 TOP5 | — | ✅ |
+| 订单 / 打赏记录导出 CSV | — | ✅ |
+| 售后审核（同意 / 拒绝，自动改为已退款） | — | ✅ |
+| 商品批量上下架 | — | ✅ |
+| 用户禁用 / 启用 | — | ✅ |
+| 打赏记录核对（已到账 / 未到账） | — | ✅ |
+
+功能表定义在 `server/edition.js` 的 `FEATURE_TABLE`，接口层以 HTTP 402 拒绝未授权的付费功能。截图见 `docs/screenshots/`。

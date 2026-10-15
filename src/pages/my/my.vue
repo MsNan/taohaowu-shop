@@ -20,7 +20,7 @@
       </view>
     </view>
     <view class="card tools">
-      <view v-for="t in tools" :key="t.t" class="ic" @click="t.u ? go(t.u) : soon()"><uni-icons :type="t.i" size="24" color="#FF5000" /><text>{{ t.t }}</text></view>
+      <view v-for="t in tools" :key="t.t" class="ic" @click="t.u ? (t.free ? open(t.u) : go(t.u)) : soon()"><uni-icons :type="t.i" size="24" color="#FF5000" /><text>{{ t.t }}</text></view>
     </view>
     <view v-if="store.loggedIn" style="padding: 0 24rpx"><view class="btn g logout" @click="logout">退出登录</view></view>
     <view class="sec-title">— 猜你喜欢 —</view>
@@ -38,7 +38,7 @@ const sbh = uni.getSystemInfoSync().statusBarHeight || 0
 const counts = ref({}), rec = ref([])
 const stats = [['28', '收藏夹'], ['16', '关注店铺'], ['132', '足迹'], ['5', '优惠券']]
 const otabs = [{ t: '待付款', i: 'wallet', s: '待付款' }, { t: '待发货', i: 'gift', s: '待发货' }, { t: '待收货', i: 'paperplane', s: '待收货' }, { t: '已完成', i: 'checkbox', s: '已完成' }, { t: '退款/售后', i: 'loop', s: '' }]
-const tools = [{ t: '收货地址', i: 'location', u: '/pages/address/list' }, { t: '优惠券', i: 'wallet' }, { t: '红包', i: 'gift' }, { t: '我的评价', i: 'star' }, { t: '客服中心', i: 'headphones' }, { t: '发票助手', i: 'paperclip' }, { t: '收藏', i: 'heart' }, { t: '账号安全', i: 'locked' }]
+const tools = [{ t: '收货地址', i: 'location', u: '/pages/address/list' }, { t: '优惠券', i: 'wallet' }, { t: '红包', i: 'gift' }, { t: '我的评价', i: 'star' }, { t: '客服中心', i: 'headphones' }, { t: '发票助手', i: 'paperclip' }, { t: '收藏', i: 'heart' }, { t: '打赏支持', i: 'heart-filled', u: '/pages/reward/reward', free: true }]
 onLoad(async () => { rec.value = (await api.products({ sort: 'sales' })).slice(4, 8) })
 onShow(async () => {
   if (!store.loggedIn) { counts.value = {}; return }
@@ -48,6 +48,7 @@ onShow(async () => {
 const mask = p => p.slice(0, 3) + '****' + p.slice(7)
 const login = () => uni.navigateTo({ url: '/pages/login/login' })
 const go = u => { if (store.requireLogin()) uni.navigateTo({ url: u }) }
+const open = u => uni.navigateTo({ url: u })
 const soon = () => uni.showToast({ title: '功能开发中', icon: 'none' })
 const logout = () => uni.showModal({ title: '提示', content: '确定退出登录？', confirmColor: '#FF5000', success: r => { if (r.confirm) { store.logout(); counts.value = {} } } })
 </script>

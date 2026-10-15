@@ -35,5 +35,8 @@ export const api = {
   orders: status => request('/orders' + q({ status })),
   order: id => request('/orders/' + id),
   orderAct: (id, act, data) => request(`/orders/${id}/${act}`, { method: 'POST', data }),
-  afterSale: (id, d) => request(`/orders/${id}/aftersale`, { method: 'POST', data: d })
+  afterSale: (id, d) => request(`/orders/${id}/aftersale`, { method: 'POST', data: d }),
+  edition: () => request('/edition'),
+  rewardConfig: () => request('/reward/config'),
+  rewardSubmit: d => request('/rewards', { method: 'POST', data: d })
 }

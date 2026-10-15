@@ -9,17 +9,24 @@ import path from 'node:path'
 
 const __dir = path.dirname(fileURLToPath(import.meta.url))
 const PORT = process.env.PORT || 3000
-const SECRET = process.env.JWT_SECRET || 'taohaowu-dev-secret'
+const SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? (await import('node:crypto')).randomBytes(32).toString('hex') : 'taohaowu-dev-secret')
 const PAY_TIMEOUT_MS = Number(process.env.PAY_TIMEOUT_MS || 15 * 60 * 1000)
 const DEV = process.env.NODE_ENV !== 'production'
 
 const seed = JSON.parse(readFileSync(path.join(__dir, 'seed.json'), 'utf8'))
 const dataDir = path.join(__dir, 'data'); if (!existsSync(dataDir)) mkdirSync(dataDir)
 const db = await JSONFilePreset(path.join(dataDir, 'db.json'), {
-  users: [], codes: {}, carts: {}, addresses: [], orders: [], afterSales: [], seq: 1
+  users: [], codes: {}, carts: {}, addresses: [], orders: [], afterSales: [], rewards: [], seq: 1
 })
-const products = seed.products, categories = seed.categories, banners = seed.banners
-const findP = id => products.find(p => p.id === Number(id))
+// 商品/分类/轮播首次启动时从 seed.json 导入数据库，之后由管理后台维护
+db.data.products ||= seed.products.map(p => ({ onSale: true, stock: 999, ...p }))
+db.data.categories ||= seed.categories
+db.data.banners ||= seed.banners
+db.data.rewards ||= []
+if (db.data.seq < 1000) db.data.seq = 1000
+await db.write()
+const onSale = () => db.data.products.filter(p => p.onSale !== false)
+const findP = id => db.data.products.find(p => p.id === Number(id))
 const nid = () => db.data.seq++
 
 const app = express()
@@ -30,7 +37,7 @@ const fail = (res, msg, status = 400) => res.status(status).json({ code: status,
 
 function auth(req, res, next) {
   const t = (req.headers.authorization || '').replace(/^Bearer /, '')
-  try { req.uid = jwt.verify(t, SECRET).uid; next() } catch { fail(res, '请先登录', 401) }
+  try { req.uid = jwt.verify(t, SECRET).uid; if (!req.uid || db.data.users.find(u => u.id === req.uid)?.disabled) throw 0; next() } catch { fail(res, '请先登录', 401) }
 }
 
 // 超时未支付自动取消
@@ -42,11 +49,11 @@ function sweep() {
 setInterval(sweep, 10 * 1000)
 
 // ---------- 商品 ----------
-app.get('/api/home', (req, res) => ok(res, { banners, categories, products }))
-app.get('/api/categories', (req, res) => ok(res, categories))
-app.get('/api/banners', (req, res) => ok(res, banners))
+app.get('/api/home', (req, res) => ok(res, { banners: db.data.banners, categories: db.data.categories, products: onSale() }))
+app.get('/api/categories', (req, res) => ok(res, db.data.categories))
+app.get('/api/banners', (req, res) => ok(res, db.data.banners))
 app.get('/api/products', (req, res) => {
-  let list = products
+  let list = onSale()
   const { q, categoryId, sort } = req.query
   if (q) list = list.filter(p => p.name.toLowerCase().includes(String(q).toLowerCase()) || p.shop.includes(q))
   if (categoryId) list = list.filter(p => p.categoryId === Number(categoryId))
@@ -73,6 +80,7 @@ app.post('/api/auth/login', async (req, res) => {
   delete db.data.codes[phone]
   let u = db.data.users.find(u => u.phone === phone)
   if (!u) { u = { id: nid(), phone, nickname: '淘友' + phone.slice(-4), createdAt: Date.now() }; db.data.users.push(u) }
+  if (u.disabled) return fail(res, '账号已被禁用', 403)
   await db.write()
   ok(res, { token: jwt.sign({ uid: u.id }, SECRET, { expiresIn: '30d' }), user: u })
 })
@@ -167,6 +175,21 @@ app.post('/api/orders/:id/aftersale', auth, async (req, res) => {
   await db.write(); ok(res, a)
 })
 app.get('/api/aftersales', auth, (req, res) => ok(res, db.data.afterSales.filter(a => a.uid === req.uid)))
+
+// ---------- 打赏 / 版本 / 管理后台 ----------
+import { mountAdmin } from './admin.js'
+import { EDITION, features } from './edition.js'
+app.get('/api/edition', (req, res) => ok(res, { edition: EDITION, features }))
+app.get('/api/reward/config', (req, res) => ok(res, { wechat: '/images/reward/wechat.jpg', alipay: '/images/reward/alipay.jpg', tip: '打赏全凭自愿，感谢支持！' }))
+app.post('/api/rewards', async (req, res) => {
+  const { channel, amount, nickname = '匿名', message = '' } = req.body || {}
+  if (!['微信', '支付宝'].includes(channel)) return fail(res, '请选择打赏渠道')
+  const amt = Math.round(Number(amount) * 100) / 100
+  if (!(amt > 0 && amt <= 10000)) return fail(res, '金额不正确')
+  const r = { id: nid(), channel, amount: amt, nickname: String(nickname).slice(0, 20), message: String(message).slice(0, 200), status: '待核对', createdAt: Date.now() }
+  db.data.rewards.unshift(r); await db.write(); ok(res, r)
+})
+mountAdmin(app, { db, ok, fail, findP, nid, SECRET, express, dir: __dir })
 
 app.get('/favicon.ico', (req, res) => res.status(204).end())
 // 可选：同端口托管 H5 构建产物
