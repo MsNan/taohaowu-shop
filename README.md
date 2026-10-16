@@ -131,3 +131,14 @@ npm run build:mp-weixin      # 或 npm run dev:mp-weixin（监听修改）
 | 打赏记录核对（已到账 / 未到账） | — | ✅ |
 
 功能表定义在 `server/edition.js` 的 `FEATURE_TABLE`，接口层以 HTTP 402 拒绝未授权的付费功能。截图见 `docs/screenshots/`。
+
+## ☕ 打赏支持
+
+如果这个项目对你有帮助，欢迎请作者喝杯咖啡，也欢迎点个 ⭐ Star！
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/donate/wechat.jpg" alt="微信打赏" width="220"><br>微信</td>
+    <td align="center"><img src="docs/donate/alipay.jpg" alt="支付宝打赏" width="220"><br>支付宝</td>
+  </tr>
+</table>
