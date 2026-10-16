@@ -4,3 +4,4 @@ unpackage/
 
 **/node_modules/
 server/data/db.json
+.env
