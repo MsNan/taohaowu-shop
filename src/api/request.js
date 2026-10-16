@@ -1,4 +1,5 @@
 import { API_BASE } from '../config'
+import { useShopStore } from '../store'
 export function request(url, { method = 'GET', data } = {}) {
   const token = uni.getStorageSync('token')
   return new Promise((resolve, reject) => {
@@ -8,7 +9,7 @@ export function request(url, { method = 'GET', data } = {}) {
       success: r => {
         if (r.statusCode === 200 && r.data.code === 0) return resolve(r.data.data)
         const msg = r.data?.message || '请求失败'
-        if (r.statusCode === 401) { uni.removeStorageSync('token') }
+        if (r.statusCode === 401) { uni.removeStorageSync('token'); try { useShopStore().logout() } catch (e) {} }
         uni.showToast({ title: msg, icon: 'none' }); reject(new Error(msg))
       },
       fail: e => { uni.showToast({ title: '网络开小差了', icon: 'none' }); reject(e) }
