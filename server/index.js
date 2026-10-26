@@ -90,18 +90,23 @@ app.get('/api/me', auth, (req, res) => ok(res, db.data.users.find(u => u.id === 
 const cartOf = uid => (db.data.carts[uid] ||= [])
 const cartView = uid => cartOf(uid).map(i => ({ ...i, product: findP(i.productId) })).filter(i => i.product)
 app.get('/api/cart', auth, (req, res) => ok(res, cartView(req.uid)))
+// 数量只接受 1~999 的整数；负数、小数、字符串一律拒绝
+const toQty = v => { const n = Number(v); return Number.isInteger(n) && n >= 1 && n <= 999 ? n : null }
+const buyable = id => { const p = findP(id); return p && p.onSale !== false ? p : null }
 function addItem(uid, { productId, spec = '', qty = 1, checked = true }) {
-  if (!findP(productId)) return
+  const n = toQty(qty)
+  if (!buyable(productId) || !n) return false
   const c = cartOf(uid), key = productId + '|' + spec
   const f = c.find(i => i.key === key)
-  if (f) f.qty += Number(qty); else c.push({ key, productId: Number(productId), spec, qty: Number(qty), checked })
+  if (f) f.qty = Math.min(999, f.qty + n); else c.push({ key, productId: Number(productId), spec, qty: n, checked: !!checked })
+  return true
 }
-app.post('/api/cart', auth, async (req, res) => { addItem(req.uid, req.body); await db.write(); ok(res, cartView(req.uid)) })
+app.post('/api/cart', auth, async (req, res) => { if (!addItem(req.uid, req.body)) return fail(res, '商品已下架或数量不正确'); await db.write(); ok(res, cartView(req.uid)) })
 app.post('/api/cart/merge', auth, async (req, res) => { (req.body.items || []).forEach(i => addItem(req.uid, i)); await db.write(); ok(res, cartView(req.uid)) })
 app.put('/api/cart/:key', auth, async (req, res) => {
   const f = cartOf(req.uid).find(i => i.key === req.params.key)
   if (!f) return fail(res, '不存在', 404)
-  if (req.body.qty !== undefined) f.qty = Math.max(1, Number(req.body.qty))
+  if (req.body.qty !== undefined) { const n = toQty(req.body.qty); if (!n) return fail(res, '数量不正确'); f.qty = n }
   if (req.body.checked !== undefined) f.checked = !!req.body.checked
   await db.write(); ok(res, cartView(req.uid))
 })
@@ -137,8 +142,15 @@ app.post('/api/orders', auth, async (req, res) => {
   const addr = db.data.addresses.find(a => a.id === Number(addressId) && a.uid === req.uid)
   if (!addr) return fail(res, '请选择收货地址')
   if (!items?.length) return fail(res, '没有商品')
-  const lines = items.map(i => { const p = findP(i.productId); return p && { productId: p.id, name: p.name, image: p.images[0], price: p.price, spec: i.spec, qty: Number(i.qty) } }).filter(Boolean)
-  const goods = lines.reduce((t, i) => t + i.price * i.qty, 0)
+  const lines = []
+  for (const i of items) {
+    const p = buyable(i.productId), qty = toQty(i.qty)
+    if (!p) return fail(res, '有商品已下架，请返回购物车查看')
+    if (!qty) return fail(res, '商品数量不正确')
+    lines.push({ productId: p.id, name: p.name, image: p.images[0], price: p.price, spec: i.spec, qty })
+  }
+  // 按分计算，避免 39.9 * 3 = 119.69999999999999 这种结果写进订单
+  const goods = lines.reduce((t, i) => t + Math.round(i.price * 100) * i.qty, 0) / 100
   const discount = goods >= 300 ? 50 : 0
   const now = Date.now()
   const o = { id: 'TB' + now + Math.floor(Math.random() * 100), uid: req.uid, items: lines, goodsAmount: goods, discount, freight: 0,
